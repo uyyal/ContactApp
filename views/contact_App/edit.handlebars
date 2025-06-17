@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="http://localhost:5000/api/style2">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Contact</title>
+  <link rel="stylesheet" href="http://localhost:5000/api/style2" />
 </head>
 <body>
-    <div class="contact">
-        {{#if editData}}
+  <div class="contact">
+    {{#if editData}}
     <div class="contactform">
-    <h1>Add a Contact</h1>
+      <h1>Edit Contact</h1>
 
+      <form action='/api/edit/{{editData._id}}' method="post">
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname" value="{{editData.fname}}" placeholder="Enter First Name"/>
 
-    <form action='/api/edit/{{editData._id}}' method="post">
-       
-       
-       <label for="fname">First Name</label>
-       <input type="text" name="fname" id="fname" value="{{editData.fname}}" placeholder="Enter First Name">
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname" value="{{editData.lname}}" placeholder="Enter Last Name"/>
 
-       <label for="lname">Last Name</label>
-       <input type="text" name="lname" id="lname" value="{{editData.lname}}" placeholder="Enter Last Name">
+        <label for="nmbr">Mobile Number</label>
+        <input type="number" name="nmbr" id="nmbr" value="{{editData.nmbr}}" placeholder="Enter Mobile Number"/>
 
-       <label for="nmbr">Mobile Number</label>
-       <input type="number" name="nmbr" id="nmbr" value="{{editData.nmbr}}" placeholder="Enter Mobile Number">
-      
-      <label for="fname">Saving Location</label>
-       <select name="loc" id="loc">
-        <option disabled selected>{{editData.loc}}</option>
-        <option value="mobile">mobile</option>
-        <option value="sim">sim</option>
-        <option value="email">email</option>
-       </select>
+        <label for="loc">Saving Location</label>
+        <select name="loc" id="loc">
+          <option disabled>Select Location</option>
+          <option value="mobile" {{#ifCond editData.loc '==' 'mobile'}}selected{{/ifCond}}>mobile</option>
+          <option value="sim" {{#ifCond editData.loc '==' 'sim'}}selected{{/ifCond}}>sim</option>
+          <option value="email" {{#ifCond editData.loc '==' 'email'}}selected{{/ifCond}}>email</option>
+        </select>
 
-       <button class="btn1" type="submit">Update Details</button>
-    </form>
-
-    
-</div>
-{{/if}}
-</div>
+        <button class="btn1" type="submit">Update Details</button>
+      </form>
+    </div>
+    {{/if}}
+  </div>
 </body>
 </html>

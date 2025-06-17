@@ -1,3 +1,4 @@
+
 .cnt-info-wrapper {
     font-family: 'Arial', sans-serif;
     padding: 20px;
@@ -5,7 +6,10 @@
     margin: auto;
     color: #333;
   }
-  
+  .section1{
+    margin-top: 100px;
+
+  }
   .cntinfo {
     background: #ffffff;
     border: 1px solid #ddd;

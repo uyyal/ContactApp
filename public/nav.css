@@ -1,84 +1,85 @@
-/* Reset margin and padding for all elements */
+/* Base Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Navbar Styles */
-.nav {
-    background: linear-gradient(to right, #007BFF, #00C6FF); /* Beautiful gradient background */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* More pronounced shadow */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    padding: 10px 0; /* Adds some space on top and bottom */
+body {
+  font-family: Arial, sans-serif;
 }
 
-/* Unordered List Styles */
-.ul1 {
-    list-style-type: none;
-    display: flex;
-    justify-content: center; /* Center the navbar items */
-    align-items: center;
-    margin: 0;
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #0077b6;
+  padding: 10px 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
 }
 
-/* List Item Styles */
-.ul1 li {
-    margin: 0 20px; /* Spacing between items */
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-/* Anchor Link Styles */
-.ul1 li a {
-    display: block;
-    padding: 12px 25px; /* Padding for better spacing */
-    text-decoration: none;
-    color: white;
-    font-size: 1.2rem; /* Larger, more readable font */
-    font-weight: 600; /* Slightly bolder text */
-    letter-spacing: 1px; /* Adds some space between letters */
-    text-transform: uppercase; /* Uppercase text for emphasis */
-    transition: all 0.3s ease; /* Smooth hover effect */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
-/* Hover Effect */
-.ul1 li a:hover {
-    background-color: #575757;
-    color: #ffcc00;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
-    border-radius: 5px;
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  transition: color 0.3s;
 }
 
-/* Active State Effect */
-.ul1 li a:active {
-    background-color: #ffcc00;
-    color: #333;
-    border-radius: 5px;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+.nav-links li a:hover {
+  color: #ffd60a;
 }
 
-/* Responsive Design */
+.toggle-button {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.content {
+  padding: 100px 20px 20px 20px; /* to avoid content hidden under navbar */
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
-    .ul1 {
-        flex-direction: column; /* Stack items vertically on smaller screens */
-        text-align: center;
-    }
+  .toggle-button {
+    display: block;
+  }
 
-    .ul1 li {
-        margin: 10px 0; /* Adjust margin for vertical stacking */
-    }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: #0077b6;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 10px 0;
+  }
 
-    .ul1 li a {
-        font-size: 1rem; /* Slightly smaller font on smaller screens */
-        padding: 10px 20px; /* Reduce padding for better fit */
-    }
-}
+  .nav-links.active {
+    display: flex;
+  }
 
-/* Responsive for smaller devices */
-@media (max-width: 480px) {
-    .ul1 li a {
-        font-size: 0.9rem; /* Even smaller font for small mobile devices */
-        padding: 8px 18px; /* Smaller padding for mobile screens */
-    }
+  .nav-links li {
+    text-align: center;
+    margin: 10px 0;
+  }
 }

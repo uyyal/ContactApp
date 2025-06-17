@@ -1,21 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="http://localhost:5000/api/style1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Responsive Navbar</title>
+  <link rel="stylesheet" href="/api/style1" />
+  {{!-- <link rel="stylesheet" href="style.css" /> --}}
 </head>
 <body>
-    <div class="nav">
-    <ul class="ul1">
-        <li><a href="/">Home</a></li>
-        <li><a href="/api/form">Add Contact</a></li>
-        <li><a href="/api/allcontacts">View Contact</a></li>
-
+  <nav class="navbar">
+    <div class="logo">Contact App</div>
+    <button class="toggle-button" id="menu-toggle">&#9776;</button>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/api/form">Add Contact</a></li>
+      <li><a href="/api/allcontacts">View Contact</a></li>
     </ul>
-    </div>
+  </nav>
+
+  {{!-- <main class="content">
+    <p>Content goes here. Scroll to see navbar stays fixed.</p>
+    <!-- Add more content to test scroll -->
+    <div style="height: 1500px;"></div>
+  </main> --}}
+
+  <script>
+    // Toggle navbar for mobile
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      document.getElementById("nav-links").classList.toggle("active");
+    });
+  </script>
 </body>
 </html>
-
-
