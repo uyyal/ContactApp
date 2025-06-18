@@ -1,104 +1,105 @@
-const {Router} =require('express')//Importing the Router class from Express to create a modular, mountable route handler.
-const router =Router() //Creating a new router instance to define routes specific to the application
-const Cnt_Schema=require('../Schema/schema')//Importing the contact schema from a schema file to interact with the MongoDB database.
-const fs=require('fs') //Importing the Node.js fs module to handle file system operations, such as reading CSS files.
+const { Router } = require('express');
+const router = Router();
+const Cnt_Schema = require('../Schema/schema');
 
+// -----------------------------
+// Add a Contact (POST request)
+// -----------------------------
+router.post('/form', async (req, res) => {
+  try {
+    await Cnt_Schema.create(req.body);
+    res.redirect('/', 302);
+  } catch (error) {
+    console.error('Error adding contact:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-//Purpose: Adds a new contact.
-router.post('/form',async(req,res)=>{
-    await Cnt_Schema.create(req.body)//Creates a new document in MongoDB using Cnt_Schema.create with req.body.
-    res.redirect('/',302,{})//Redirects to the root path (/). ,//HTTP Status Codes: Status codes like 302 for redirection are explicit and correct.
-})
+// --------------------------------------
+// Render the Add Contact Form (GET)
+// --------------------------------------
+router.get('/form', (req, res) => {
+  res.render('contact_App/addContact', { title: 'Add_Contact' });
+});
 
-//Purpose: Handles GET requests to render the contact form.
-router.get('/form',(req,res)=>{
-    res.render('contact_App/addContact',{title:'Add_Contact'})//Action: Renders the addContact form view with the title Add_Contact.
-})  
+// --------------------------------------
+// Display All Contacts (GET)
+// --------------------------------------
+router.get('/allcontacts', async (req, res) => {
+  try {
+    const payload = await Cnt_Schema.find({}).lean();
+    res.render('contact_App/cnt_list', { title: 'All-Contacts', payload });
+  } catch (error) {
+    console.error('Error fetching all contacts:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
+// --------------------------------------
+// Display Single Contact Info (GET)
+// --------------------------------------
+router.get('/contact/:id', async (req, res) => {
+  try {
+    const payload = await Cnt_Schema.findById(req.params.id).lean();
+    res.render('contact_App/cntinfo', { title: 'Contact Info', payload });
+  } catch (error) {
+    console.error('Error fetching contact info:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-//Purpose: Serve specific CSS files
-router.get('/style',(req,res)=>{
-    fs.readFile('./public/contactform.css',(err,data)=>{ //Action: Each route reads its respective CSS file and sends the data as the response.
-        if(err) throw err
-        res.end(data)
-    })
-})
-router.get('/style1',(req,res)=>{
-    fs.readFile('./public/nav.css',(err,data)=>{//Action: Each route reads its respective CSS file and sends the data as the response.
-        if(err) throw err
-        res.end(data)
-    })
-})
+// --------------------------------------
+// Render Edit Contact Form (GET)
+// --------------------------------------
+router.get('/edit/:id', async (req, res) => {
+  try {
+    const editData = await Cnt_Schema.findById(req.params.id).lean();
+    res.render('contact_App/edit', { title: 'Edit Contact', editData });
+  } catch (error) {
+    console.error('Error loading edit form:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-router.get('/style2',(req,res)=>{
-    fs.readFile('./public/edit.css',(err,data)=>{//Action: Each route reads its respective CSS file and sends the data as the response.
-        if(err) throw err
-        res.end(data)
-    })
-})
+// --------------------------------------
+// Update Contact (POST)
+// --------------------------------------
+router.post('/edit/:id', async (req, res) => {
+  try {
+    const contact = await Cnt_Schema.findById(req.params.id);
+    contact.fname = req.body.fname;
+    contact.lname = req.body.lname;
+    contact.nmbr = req.body.nmbr;
+    contact.loc = req.body.loc;
+    await contact.save();
+    res.redirect('/api/allcontacts', 302);
+  } catch (error) {
+    console.error('Error updating contact:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-router.get('/style3',(req,res)=>{
-    fs.readFile('./public/cnt_list.css',(err,data)=>{ //Action: Each route reads its respective CSS file and sends the data as the response.
-        if(err) throw err
-        res.end(data)
-    })
-})
+// --------------------------------------
+// Delete Contact (GET)
+// --------------------------------------
+router.get('/delete/:id', async (req, res) => {
+  try {
+    await Cnt_Schema.deleteOne({ _id: req.params.id });
+    res.redirect('/api/allcontacts', 302);
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
-router.get('/style4',(req,res)=>{
-    fs.readFile('./public/cnt_info.css',(err,data)=>{ //Action: Each route reads its respective CSS file and sends the data as the response.
-        if(err) throw err
-        res.end(data)
-    })
-})
+// --------------------------------------
+// Recommendation: Serve Static CSS
+// --------------------------------------
+// Instead of using fs.readFile for each CSS file,
+// in app.js or server.js, add this once:
+// app.use('/static', express.static('public'))
+//
+// And in HTML use: 
+// <link rel="stylesheet" href="/static/contactform.css">
 
-
-
-
-//Purpose: Fetches and displays contact details by ID.
-router.get('/contact/:id',async(req,res)=>{
-    let id =req.params.id;//Extracts the id from the URL parameter.
-    let payload=await Cnt_Schema.findById(id).lean()//Fetches the contact data using Cnt_Schema.findById. //Uses .lean() to convert the MongoDB document into a plain JavaScript object.
-    res.render('contact_App/cntinfo',{title:'contact-info',payload}) //Renders the cntinfo view with the contact's data.
-})
-
-//Purpose: Displays all saved contacts.
-router.get('/allcontacts',async(req,res)=>{
-    let payload=await Cnt_Schema.find({}).lean()//Fetches all contacts from MongoDB using Cnt_Schema.find({}).
-    res.render('contact_App/cnt_list',{title:'All-Contacts',payload})//Renders the cnt_list view with the list of contacts.
-})
-
-
-//Purpose: Fetches contact details for editing.
-router.get('/edit/:id',async(req,res)=>{
-    let editData=await Cnt_Schema.findOne({_id:req.params.id}).lean();//Fetches the document by _id from MongoDB using Cnt_Schema.findOne.
-    res.render('contact_App/edit',{title:'edit-data',editData})//Renders the edit view with the contact's editable data.
-})
-
-// Purpose: Updates an existing contact's details.
-router.post('/edit/:id',async(req,res)=>{ //Fetches the contact by _id.
-    let editData=await Cnt_Schema.findOne({_id:req.params.id})
-    editData.fname=req.body.fname;//Updates the fields (fname, lname, nmbr, loc) with form data (req.body).
-    editData.lname=req.body.lname;
-    editData.nmbr=req.body.nmbr;
-    editData.loc=req.body.loc;
-   editData.save() //Saves the updated document back to MongoDB.
-   res.redirect('/api/allcontacts',302,{})
-})
-//Purpose: Deletes a contact by ID.
-router.get('/delete/:id',async(req,res)=>{
-    await Cnt_Schema.deleteOne({_id:req.params.id}) //Deletes the document with the specified _id using Cnt_Schema.deleteOne.
-   res.redirect('/api/allcontacts',302,{})
-
-})
-
-
-
-
-module.exports =router;//Exports the router instance to be used in other parts of the application.
-
-// Additional Notes
-// Error Handling: Minimal error handling (throws error directly). Consider adding try-catch blocks for robust handling.
-// Static Files: The routes serving CSS files (style, style1, etc.) could use express.static instead for efficiency.
-// HTTP Status Codes: Status codes like 302 for redirection are explicit and correct.
-// Rendering Views: Uses res.render to serve dynamic views with templates and data.
-// This structure ensures modular and organized handling of a contact management system with CRUD operations.
+module.exports = router;
