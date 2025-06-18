@@ -4,7 +4,145 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Edit Contact</title>
-  <link rel="stylesheet" href="/api/style2" />
+  <style>
+    .contact {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+      margin: auto;
+      animation: fadeIn 1s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .contactform {
+      margin-top: 80px;
+      width: 100%;
+    }
+
+    .contactform h1 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .contactform label {
+      display: block;
+      font-size: 1rem;
+      margin: 10px 0 5px;
+      color: #555;
+    }
+
+    .contactform input,
+    .contactform select {
+      width: 100%;
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+      color: #333;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .contactform input:focus,
+    .contactform select:focus {
+      border-color: #6a11cb;
+      box-shadow: 0 0 5px rgba(106, 17, 203, 0.5);
+      outline: none;
+      transform: scale(1.02);
+    }
+
+    .contactform .btn1 {
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.3s ease-in-out, transform 0.2s;
+    }
+
+    .contactform .btn1:hover {
+      background: linear-gradient(to left, #6a11cb, #2575fc);
+      transform: translateY(-2px);
+    }
+
+    .contactform .btn1:active {
+      transform: translateY(1px);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .contact {
+        padding: 25px;
+        max-width: 90%;
+      }
+
+      .contactform h1 {
+        font-size: 1.6rem;
+      }
+
+      .contactform label,
+      .contactform input,
+      .contactform select,
+      .contactform .btn1 {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .contact {
+        padding: 20px;
+      }
+
+      .contactform h1 {
+        font-size: 1.5rem;
+      }
+
+      .contactform label,
+      .contactform input,
+      .contactform select,
+      .contactform .btn1 {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact {
+        padding: 15px;
+      }
+
+      .contactform h1 {
+        font-size: 1.4rem;
+      }
+
+      .contactform label,
+      .contactform input,
+      .contactform select,
+      .contactform .btn1 {
+        font-size: 0.85rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="contact">

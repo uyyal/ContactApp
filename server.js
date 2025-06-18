@@ -7,9 +7,6 @@ const { PORT, MONGODB_URI } = require('./Config/index');
 
 const app = express();
 
-// ✅ Static middleware (for CSS, JS, images)
-app.use('/static', express.static(path.join(__dirname, 'public')));
-
 // ✅ Handlebars engine with helper
 app.engine('handlebars', engine({
   helpers: {
@@ -32,7 +29,7 @@ app.engine('handlebars', engine({
 }));
 app.set('view engine', 'handlebars');
 
-// ✅ Body parser
+// ✅ Body parser for form data
 app.use(express.urlencoded({ extended: true }));
 
 // ✅ MongoDB connection
@@ -42,7 +39,7 @@ const connectDb = async () => {
     console.log('MongoDB connected successfully');
   } catch (err) {
     console.error('MongoDB connection failed:', err);
-    process.exit(1); // Exit if DB connection fails
+    process.exit(1);
   }
 };
 connectDb();
@@ -58,7 +55,7 @@ app.get('/form', (req, res) => {
 
 app.use('/api', routing);
 
-// ✅ Server start
+// ✅ Start server
 app.listen(PORT, (err) => {
   if (err) throw err;
   console.log(`Server is running on port ${PORT}`);

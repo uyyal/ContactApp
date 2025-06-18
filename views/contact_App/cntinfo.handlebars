@@ -3,8 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-  <link rel="stylesheet" href="/api/style4" />
+  <title>Contact Info</title>
+
+  <style>
+    .cnt-info-wrapper {
+      font-family: 'Arial', sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+      color: #333;
+    }
+
+    .cntinfo {
+      margin-top: 80px;
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .cntinfo:hover {
+      transform: scale(1.02);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .cntinfo h1 {
+      text-align: center;
+      color: #444;
+      font-size: 24px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    .cntlists {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      padding: 10px;
+    }
+
+    .sp1 {
+      font-size: 16px;
+      color: #555;
+    }
+
+    .sp1 strong {
+      color: #333;
+    }
+
+    .b1 {
+      font-size: 18px;
+      color: #dc3545;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .cnt-info-wrapper {
+        padding: 10px;
+      }
+
+      .cntinfo {
+        padding: 15px;
+      }
+
+      .cntinfo h1 {
+        font-size: 20px;
+      }
+
+      .sp1 {
+        font-size: 14px;
+      }
+
+      .b1 {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .cntlists {
+        gap: 10px;
+      }
+
+      .sp1 {
+        font-size: 12px;
+      }
+
+      .cntinfo h1 {
+        font-size: 18px;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="cnt-info-wrapper">
@@ -12,10 +108,10 @@
     <div class="cntinfo">
       <h1>Contact Info</h1>
       <div class="cntlists">
-        <span class="sp1"><strong>First Name:</strong>{{payload.fname}}</span>
-        <span class="sp1"><strong>Last Name:</strong>{{payload.lname}}</span>
-        <span class="sp1"><strong>Mobile:</strong>{{payload.nmbr}}</span>
-        <span class="sp1"><strong>Saved Location:</strong>{{payload.loc}}</span>
+        <span class="sp1"><strong>First Name:</strong> {{payload.fname}}</span>
+        <span class="sp1"><strong>Last Name:</strong> {{payload.lname}}</span>
+        <span class="sp1"><strong>Mobile:</strong> {{payload.nmbr}}</span>
+        <span class="sp1"><strong>Saved Location:</strong> {{payload.loc}}</span>
       </div>
     </div>
     {{else}}
