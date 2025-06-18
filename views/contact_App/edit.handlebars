@@ -4,14 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Edit Contact</title>
-  <link rel="stylesheet" href="http://localhost:5001/api/style2" />
+  <link rel="stylesheet" href="/api/style2" />
 </head>
 <body>
   <div class="contact">
     {{#if editData}}
     <div class="contactform">
       <h1>Edit Contact</h1>
-
       <form action='/api/edit/{{editData._id}}' method="post">
         <label for="fname">First Name</label>
         <input type="text" name="fname" id="fname" value="{{editData.fname}}" placeholder="Enter First Name"/>

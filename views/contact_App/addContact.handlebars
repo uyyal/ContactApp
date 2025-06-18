@@ -1,43 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    {{!-- <link rel="stylesheet" href="/contactform.css"> --}}
-    <link rel="stylesheet" href="http://localhost:5001/api/style">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/api/style" />
 </head>
 <body>
-    <div class="contact">
+  <div class="contact">
     <div class="contactform">
-    <h1>Add a Contact</h1>
+      <h1>Add a Contact</h1>
+      <form action="/api/form" method="post">
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname" placeholder="Enter First Name" />
 
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname" placeholder="Enter Last Name" />
 
-    <form action="/api/form" method="post">
-       
-       
-       <label for="fname">First Name</label>
-       <input type="text" name="fname" id="fname" placeholder="Enter First Name">
+        <label for="nmbr">Mobile Number</label>
+        <input type="number" name="nmbr" id="nmbr" placeholder="Enter Mobile Number" />
 
-       <label for="lname">Last Name</label>
-       <input type="text" name="lname" id="lname" placeholder="Enter Last Name">
+        <label for="loc">Saving Location</label>
+        <select name="loc" id="loc">
+          <option value="mobile">mobile</option>
+          <option value="sim">sim</option>
+          <option value="email">email</option>
+        </select>
 
-       <label for="nmbr">Mobile Number</label>
-       <input type="number" name="nmbr" id="nmbr" placeholder="Enter Mobile Number">
-      
-      <label for="loc">Saving Location</label>
-       <select name="loc" id="loc">
-        <option value="mobile">mobile</option>
-        <option value="sim">sim</option>
-        <option value="email">email</option>
-       </select>
-
-       <button class="btn1" type="submit">SUBMIT</button>
-    </form>
-
-    
-</div>
-</div>
+        <button class="btn1" type="submit">SUBMIT</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

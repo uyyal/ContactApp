@@ -1,53 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Document</title>
-  <link rel="stylesheet" href="http://localhost:5001/api/style3">
+  <link rel="stylesheet" href="/api/style3" />
 </head>
 <body>
   <div class="contactlist">
-
-  <section>
-    <h1>Contact List</h1>
-
-    {{#each payload}}
-    <div class="card">
-      
-    <ul>
-      <div class="cards">
-        <li class="li1">First Name:{{this.fname}}</li> <br>
-        <li class="li1">Last Name:{{this.lname}}</li> <br>
-        <li class="li1">Number:{{this.nmbr}}</li> <br>
-        <li class="li1">Saved Locations:{{this.loc}}</li> <br>
+    <section>
+      <h1>Contact List</h1>
+      {{#each payload}}
+      <div class="card">
+        <ul>
+          <div class="cards">
+            <li class="li1">First Name:{{this.fname}}</li><br />
+            <li class="li1">Last Name:{{this.lname}}</li><br />
+            <li class="li1">Number:{{this.nmbr}}</li><br />
+            <li class="li1">Saved Locations:{{this.loc}}</li><br />
+          </div>
+        </ul>
+        <div class="card-footer">
+          <span><a href="/api/contact/{{this._id}}" class="btn-info">Info</a></span>
+          <span><a href="/api/edit/{{this._id}}" class="btn-edit">Edit</a></span>
+          <span id="delicon">
+            <a href="/api/delete/{{this._id}}" class="btn-delete">
+              <lord-icon
+                src="https://cdn.lordicon.com/qnhhgmwn.json"
+                trigger="hover"
+                style="width:23px;height:23px; vertical-align: middle;">
+              </lord-icon>
+              Delete
+            </a>
+          </span>
+        </div>
       </div>
-    </ul>
-
-    <div class="card-footer">
-      <span><a href="/api/contact/{{this._id}}" class="btn-info">Info</a></span>
-      <span><a href="/api/edit/{{this._id}}" class="btn-edit">Edit</a></span>
-     <span id="delicon">
-  <a href="/api/delete/{{this._id}}" class="btn-delete">
-    <lord-icon 
-      src="https://cdn.lordicon.com/qnhhgmwn.json" 
-      trigger="hover" 
-      style="width:23px;height:23px; vertical-align: middle;">
-    </lord-icon>
-    Delete
-  </a>
-</span>
-
-    </div> 
-    </div>
-  </section>
-
-  {{else}}
-  <h3>No Contacts</h3>
-  {{/each}}
-
-</div>
-<script src="https://cdn.lordicon.com/lordicon.js"></script>
-
+      {{else}}
+      <h3>No Contacts</h3>
+      {{/each}}
+    </section>
+  </div>
+  <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </body>
 </html>

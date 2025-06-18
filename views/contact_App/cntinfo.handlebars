@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-  <link rel="stylesheet" href="http://localhost:5001/api/style4">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="stylesheet" href="/api/style4" />
 </head>
 <body>
-    <div class="cnt-info-wrapper">
-        {{#if payload}}
+  <div class="cnt-info-wrapper">
+    {{#if payload}}
     <div class="cntinfo">
-        <h1>Contact Info</h1>
-        <div class="cntlists">
-            <span class="sp1"><strong>First Name:</strong>{{payload.fname}}</span>
-            <span class="sp1"><strong>Last Name:</strong>{{payload.lname}}</span>
-            <span class="sp1"><strong>Mobile:</strong>{{payload.nmbr}}</span>
-            <span class="sp1"><strong>Saved Location:</strong>{{payload.loc}}</span>
-        </div>
+      <h1>Contact Info</h1>
+      <div class="cntlists">
+        <span class="sp1"><strong>First Name:</strong>{{payload.fname}}</span>
+        <span class="sp1"><strong>Last Name:</strong>{{payload.lname}}</span>
+        <span class="sp1"><strong>Mobile:</strong>{{payload.nmbr}}</span>
+        <span class="sp1"><strong>Saved Location:</strong>{{payload.loc}}</span>
+      </div>
     </div>
     {{else}}
     <b class="b1">No such contact is found</b>
     {{/if}}
-    </div>
+  </div>
 </body>
 </html>
