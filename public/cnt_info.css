@@ -6,11 +6,9 @@
     margin: auto;
     color: #333;
   }
-  .section1{
-    margin-top: 100px;
-
-  }
+  
   .cntinfo {
+    margin-top: 80px;
     background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;

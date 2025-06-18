@@ -11,6 +11,9 @@
         flex-direction: column;
         align-items: center;
     }
+    .contactform{
+        margin-top: 80px;
+    }
 
     .contactform h1 {
         font-size: 1.8rem;
